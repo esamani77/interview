@@ -2,18 +2,29 @@
 
 import { useForm } from 'react-hook-form';
 
-import { Typography } from '@mui/material';
+import { Card, Button, Typography } from '@mui/material';
 
-import { Form } from 'src/components/hook-form';
+import { Form } from 'src/components/hook-form/hook-form-fields';
+import { FieldBuilder } from 'src/components/hook-form/rhf-field-builder';
+
+import formJson from '../../../data/data.json';
 
 export default function DashboardView() {
   const methods = useForm();
-
   const { handleSubmit } = methods;
 
-  const onSubmit = handleSubmit((data) => {
-    console.log(data);
-  });
+  const {
+    appHdr: { element: form },
+  } = formJson;
+
+  const onSubmit = handleSubmit(
+    (data) => {
+      console.log(data);
+    },
+    (errors) => {
+      console.log(errors);
+    }
+  );
 
   return (
     <>
@@ -21,11 +32,12 @@ export default function DashboardView() {
         Welcome to RUNC!
       </Typography>
       <Form methods={methods} onSubmit={onSubmit}>
-        {/*
-      import Field component from src/components/hook-form
-      and use them based on the json file you were given :
-      <Filed.Text ...hook form props />
-      */}
+        <Card spacing={2} sx={{ maxWidth: 640, mx: 'auto', p: 3 }}>
+          <FieldBuilder node={form} />
+        </Card>
+        <Button type="submit" variant="contained" fullWidth sx={{ mt: 2 }}>
+          Submit
+        </Button>
       </Form>
     </>
   );

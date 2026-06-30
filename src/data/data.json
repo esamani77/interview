@@ -1,0 +1,989 @@
+{
+  "appHdr": {
+    "element": {
+      "min": 1,
+      "max": 1,
+      "name": "AppHdr",
+      "verbose_name": "BusinessApplicationHeaderV02",
+      "description": "The Business Layer deals with Business Messages. The behaviour of the Business Messages is fully described by the Business Transaction and the structure of the Business Messages is fully described by the Message Definitions and related Message Rules, Rules and Market Practices. All of which are registered in the ISO 20022 Repository.\r\nA single new Business Message (with its accompagnying business application header) is created - by the sending MessagingEndpoint - for each business event; that is each interaction in a Business Transaction. A Business Message adheres to the following principles:\r\n\" A Business Message (and its business application header) must not contain information about the Message Transport System or the mechanics or mechanism of message sending, transportation, or receipt. \r\n\" A Business Message must be comprehensible outside of the context of the Transport Message. That is the Business Message must not require knowledge of the Transport Message to be understood.\r\n\" A Business Message may contain headers, footers, and envelopes that are meaningful for the business. When present, they are treated as any other message content, which means that they are considered part of the Message Definition of the Business Message and as such will be part of the ISO 20022 Repository.\r\n\" A Business Message refers to Business Actors by their Name. Each instance of a Business Actor has one Name. The Business Actor must not be referred to in the Transport Layer.\r\nSpecific usage of this BusinessMessageHeader may be defined by the relevant SEG.",
+      "element_type": {
+        "type": "element_sequence",
+        "uid": "5c997c67-72a1-4aad-b17a-d501d163d2b8",
+        "children": [
+          [
+            {
+              "min": 0,
+              "max": 1,
+              "name": "CharSet",
+              "verbose_name": "CharacterSet",
+              "description": "Contains the character set of the text-based elements used in the Business Message.",
+              "element_type": {
+                "type": "simple_type",
+                "uid": "a8a1e839-8fa1-4070-9ecd-adea79c9044e",
+                "external": false,
+                "external_type": "",
+                "value": "",
+                "restriction": { "base": "string", "restriction_type": "basic_restriction" }
+              }
+            },
+            {
+              "min": 1,
+              "max": 1,
+              "name": "Fr",
+              "verbose_name": "From",
+              "description": "The sending MessagingEndpoint that has created this Business Message for the receiving MessagingEndpoint that will process this Business Message.\r\n\r\nNote\tthe sending MessagingEndpoint might be different from the sending address potentially contained in the transport header (as defined in the transport layer).",
+              "element_type": {
+                "type": "choice",
+                "uid": "015453e8-9e27-4b2b-b050-33d8eaac74e4",
+                "selected_child_index": 0,
+                "children": [
+                  [
+                    {
+                      "min": 1,
+                      "max": 1,
+                      "name": "FIId",
+                      "verbose_name": "FinancialInstitutionIdentification",
+                      "description": "Identification of a financial institution.",
+                      "element_type": {
+                        "type": "element_sequence",
+                        "uid": "279fd9f9-cd36-464f-8d80-39ba56e799be",
+                        "children": [
+                          [
+                            {
+                              "min": 1,
+                              "max": 1,
+                              "name": "FinInstnId",
+                              "verbose_name": "FinancialInstitutionIdentification",
+                              "description": "Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme.",
+                              "element_type": {
+                                "type": "element_sequence",
+                                "uid": "c7350936-ef4b-4f91-b6d7-7d565a932272",
+                                "children": [
+                                  [
+                                    {
+                                      "min": 1,
+                                      "max": 1,
+                                      "name": "BICFI",
+                                      "verbose_name": "BICFI",
+                                      "description": "Code allocated to a financial institution by the ISO 9362 Registration Authority as described in ISO 9362 \"Banking - Banking telecommunication messages - Business identifier code (BIC)\".",
+                                      "element_type": {
+                                        "type": "simple_type",
+                                        "uid": "cbfe2cd2-be20-4746-bf63-631c5a99207b",
+                                        "external": true,
+                                        "external_type": "BIC",
+                                        "value": "",
+                                        "restriction": {
+                                          "base": "string",
+                                          "restriction_type": "pattern_restriction",
+                                          "pattern": "[A-Z0-9]{4,4}[A-Z]{2,2}[A-Z0-9]{2,2}([A-Z0-9]{3,3}){0,1}"
+                                        }
+                                      }
+                                    },
+                                    {
+                                      "min": 0,
+                                      "max": 1,
+                                      "name": "ClrSysMmbId",
+                                      "verbose_name": "ClearingSystemMemberIdentification",
+                                      "description": "Information used to identify a member within a clearing system.",
+                                      "element_type": {
+                                        "type": "element_sequence",
+                                        "uid": "b060d0f0-d1f6-4533-aa1f-c5f559800585",
+                                        "children": [
+                                          [
+                                            {
+                                              "min": 1,
+                                              "max": 1,
+                                              "name": "ClrSysId",
+                                              "verbose_name": "ClearingSystemIdentification",
+                                              "description": "Specification of a pre-agreed offering between clearing agents or the channel through which the payment instruction is processed.",
+                                              "element_type": {
+                                                "type": "choice",
+                                                "uid": "8cc7c746-f38c-4194-8dd4-15fafd244e3d",
+                                                "selected_child_index": 0,
+                                                "children": [
+                                                  [
+                                                    {
+                                                      "min": 1,
+                                                      "max": 1,
+                                                      "name": "Cd",
+                                                      "verbose_name": "Code",
+                                                      "description": "Identification of a clearing system, in a coded form as published in an external list.",
+                                                      "element_type": {
+                                                        "type": "simple_type",
+                                                        "uid": "c8128940-5010-40c1-8263-d58d26474d7d",
+                                                        "external": true,
+                                                        "external_type": "ExternalClearingSystemIdentification1Code",
+                                                        "value": "",
+                                                        "restriction": {
+                                                          "base": "string",
+                                                          "restriction_type": "min_max_restriction",
+                                                          "minLength": "1",
+                                                          "maxLength": "5"
+                                                        }
+                                                      }
+                                                    }
+                                                  ]
+                                                ]
+                                              }
+                                            },
+                                            {
+                                              "min": 1,
+                                              "max": 1,
+                                              "name": "MmbId",
+                                              "verbose_name": "MemberIdentification",
+                                              "description": "Identification of a member of a clearing system.",
+                                              "element_type": {
+                                                "type": "simple_type",
+                                                "uid": "6c64eaff-21a5-469b-8f5c-bb81aaa7a871",
+                                                "external": false,
+                                                "external_type": "",
+                                                "value": "",
+                                                "restriction": {
+                                                  "base": "string",
+                                                  "restriction_type": "min_max_pattern_restriction",
+                                                  "minLength": "1",
+                                                  "maxLength": "28",
+                                                  "pattern": "[0-9a-zA-Z/\\-\\?:\\(\\)\\.,'\\+ ]+"
+                                                }
+                                              }
+                                            }
+                                          ]
+                                        ]
+                                      }
+                                    },
+                                    {
+                                      "min": 0,
+                                      "max": 1,
+                                      "name": "LEI",
+                                      "verbose_name": "LEI",
+                                      "description": "Legal entity identifier of the financial institution.",
+                                      "element_type": {
+                                        "type": "simple_type",
+                                        "uid": "c4701ecc-843c-4c33-86d4-34cc08eb135d",
+                                        "external": false,
+                                        "external_type": "",
+                                        "value": "",
+                                        "restriction": {
+                                          "base": "string",
+                                          "restriction_type": "pattern_restriction",
+                                          "pattern": "[A-Z0-9]{18,18}[0-9]{2,2}"
+                                        }
+                                      }
+                                    }
+                                  ]
+                                ]
+                              }
+                            }
+                          ]
+                        ]
+                      }
+                    }
+                  ]
+                ]
+              }
+            },
+            {
+              "min": 1,
+              "max": 1,
+              "name": "To",
+              "verbose_name": "To",
+              "description": "The MessagingEndpoint designated by the sending MessagingEndpoint to be the recipient who will ultimately process this Business Message.\r\n\r\nNote the receiving MessagingEndpoint might be different from the receiving address potentially contained in the transport header (as defined in the transport layer).",
+              "element_type": {
+                "type": "choice",
+                "uid": "d6338d3f-cadc-4bd7-bb4c-0e5c1c374e14",
+                "selected_child_index": 0,
+                "children": [
+                  [
+                    {
+                      "min": 1,
+                      "max": 1,
+                      "name": "FIId",
+                      "verbose_name": "FinancialInstitutionIdentification",
+                      "description": "Identification of a financial institution.",
+                      "element_type": {
+                        "type": "element_sequence",
+                        "uid": "24f99a87-5f06-4d7d-81a9-54c1f1613c38",
+                        "children": [
+                          [
+                            {
+                              "min": 1,
+                              "max": 1,
+                              "name": "FinInstnId",
+                              "verbose_name": "FinancialInstitutionIdentification",
+                              "description": "Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme.",
+                              "element_type": {
+                                "type": "element_sequence",
+                                "uid": "e3eb7374-e8cd-4de5-9e23-c79864cd620a",
+                                "children": [
+                                  [
+                                    {
+                                      "min": 1,
+                                      "max": 1,
+                                      "name": "BICFI",
+                                      "verbose_name": "BICFI",
+                                      "description": "Code allocated to a financial institution by the ISO 9362 Registration Authority as described in ISO 9362 \"Banking - Banking telecommunication messages - Business identifier code (BIC)\".",
+                                      "element_type": {
+                                        "type": "simple_type",
+                                        "uid": "340eba68-76da-40bd-b914-dc89417d2a61",
+                                        "external": true,
+                                        "external_type": "BIC",
+                                        "value": "",
+                                        "restriction": {
+                                          "base": "string",
+                                          "restriction_type": "pattern_restriction",
+                                          "pattern": "[A-Z0-9]{4,4}[A-Z]{2,2}[A-Z0-9]{2,2}([A-Z0-9]{3,3}){0,1}"
+                                        }
+                                      }
+                                    },
+                                    {
+                                      "min": 0,
+                                      "max": 1,
+                                      "name": "ClrSysMmbId",
+                                      "verbose_name": "ClearingSystemMemberIdentification",
+                                      "description": "Information used to identify a member within a clearing system.",
+                                      "element_type": {
+                                        "type": "element_sequence",
+                                        "uid": "2659d63f-cd08-4a81-9412-d604e3eeeb8b",
+                                        "children": [
+                                          [
+                                            {
+                                              "min": 1,
+                                              "max": 1,
+                                              "name": "ClrSysId",
+                                              "verbose_name": "ClearingSystemIdentification",
+                                              "description": "Specification of a pre-agreed offering between clearing agents or the channel through which the payment instruction is processed.",
+                                              "element_type": {
+                                                "type": "choice",
+                                                "uid": "bf132b15-b0f4-49aa-8140-f7073ac5ed0e",
+                                                "selected_child_index": 0,
+                                                "children": [
+                                                  [
+                                                    {
+                                                      "min": 1,
+                                                      "max": 1,
+                                                      "name": "Cd",
+                                                      "verbose_name": "Code",
+                                                      "description": "Identification of a clearing system, in a coded form as published in an external list.",
+                                                      "element_type": {
+                                                        "type": "simple_type",
+                                                        "uid": "2d5a0b5f-79db-4817-b1d3-36e3be046ee2",
+                                                        "external": true,
+                                                        "external_type": "ExternalClearingSystemIdentification1Code",
+                                                        "value": "",
+                                                        "restriction": {
+                                                          "base": "string",
+                                                          "restriction_type": "min_max_restriction",
+                                                          "minLength": "1",
+                                                          "maxLength": "5"
+                                                        }
+                                                      }
+                                                    }
+                                                  ]
+                                                ]
+                                              }
+                                            },
+                                            {
+                                              "min": 1,
+                                              "max": 1,
+                                              "name": "MmbId",
+                                              "verbose_name": "MemberIdentification",
+                                              "description": "Identification of a member of a clearing system.",
+                                              "element_type": {
+                                                "type": "simple_type",
+                                                "uid": "fecd8315-8d77-43b9-ac4b-1d0dd8cd14b9",
+                                                "external": false,
+                                                "external_type": "",
+                                                "value": "",
+                                                "restriction": {
+                                                  "base": "string",
+                                                  "restriction_type": "min_max_pattern_restriction",
+                                                  "minLength": "1",
+                                                  "maxLength": "28",
+                                                  "pattern": "[0-9a-zA-Z/\\-\\?:\\(\\)\\.,'\\+ ]+"
+                                                }
+                                              }
+                                            }
+                                          ]
+                                        ]
+                                      }
+                                    },
+                                    {
+                                      "min": 0,
+                                      "max": 1,
+                                      "name": "LEI",
+                                      "verbose_name": "LEI",
+                                      "description": "Legal entity identifier of the financial institution.",
+                                      "element_type": {
+                                        "type": "simple_type",
+                                        "uid": "75be82ba-537d-4958-9106-358f8b81d98e",
+                                        "external": false,
+                                        "external_type": "",
+                                        "value": "",
+                                        "restriction": {
+                                          "base": "string",
+                                          "restriction_type": "pattern_restriction",
+                                          "pattern": "[A-Z0-9]{18,18}[0-9]{2,2}"
+                                        }
+                                      }
+                                    }
+                                  ]
+                                ]
+                              }
+                            }
+                          ]
+                        ]
+                      }
+                    }
+                  ]
+                ]
+              }
+            },
+            {
+              "min": 1,
+              "max": 1,
+              "name": "BizMsgIdr",
+              "verbose_name": "BusinessMessageIdentifier",
+              "description": "Unambiguously identifies the Business Message to the MessagingEndpoint that has created the Business Message.",
+              "element_type": {
+                "type": "simple_type",
+                "uid": "b3d1440e-ddbf-4f45-839b-72fef7f29618",
+                "external": false,
+                "external_type": "",
+                "value": "",
+                "restriction": {
+                  "base": "string",
+                  "restriction_type": "min_max_restriction",
+                  "minLength": "1",
+                  "maxLength": "35"
+                }
+              }
+            },
+            {
+              "min": 1,
+              "max": 1,
+              "name": "MsgDefIdr",
+              "verbose_name": "MessageDefinitionIdentifier",
+              "description": "Contains the MessageIdentifier that defines the BusinessMessage.\r\nIt must contain a MessageIdentifier published on the ISO 20022 website.\r\n\r\nexample\tcamt.001.001.03.",
+              "element_type": {
+                "type": "simple_type",
+                "uid": "06f79f9d-d4ef-4ba7-9f2b-0ea260ca0bd2",
+                "external": false,
+                "external_type": "",
+                "value": "",
+                "restriction": {
+                  "base": "string",
+                  "restriction_type": "min_max_restriction",
+                  "minLength": "1",
+                  "maxLength": "35"
+                }
+              }
+            },
+            {
+              "min": 1,
+              "max": 1,
+              "name": "BizSvc",
+              "verbose_name": "BusinessService",
+              "description": "Specifies the business service agreed between the two MessagingEndpoints under which rules this Business Message is exchanged.\r\n To be used when there is a choice of processing services or processing service levels.\r\nExample: E&I.",
+              "element_type": {
+                "type": "simple_type",
+                "uid": "bc219e45-006c-4538-a27e-61cf696c04ac",
+                "external": false,
+                "external_type": "",
+                "value": "",
+                "restriction": {
+                  "base": "string",
+                  "restriction_type": "min_max_pattern_restriction",
+                  "minLength": "6",
+                  "maxLength": "35",
+                  "pattern": "[a-z0-9]{1,10}\\.([a-z0-9]{1,10}\\.)+\\d\\d"
+                }
+              }
+            },
+            {
+              "min": 0,
+              "max": 1,
+              "name": "MktPrctc",
+              "verbose_name": "MarketPractice",
+              "description": "Specifies the market practice to which the message conforms. The market practices are a set of rules agreed between parties that restricts the usage of the messages in order to achieve better STP (Straight Through Processing) rates.\r\nA market practice specification may also extend the underlying message specification by using extensions or supplementary data of this underlying message.",
+              "element_type": {
+                "type": "element_sequence",
+                "uid": "0375b62f-fcad-4dc5-9a94-14dc4b82aebc",
+                "children": [
+                  [
+                    {
+                      "min": 1,
+                      "max": 1,
+                      "name": "Regy",
+                      "verbose_name": "Registry",
+                      "description": "Name of the implementation specification registry in which the implementation specification of the ISO 20022 message is maintained.\r\nFor example, \"MyStandards\".",
+                      "element_type": {
+                        "type": "simple_type",
+                        "uid": "c3633d23-d10f-4159-af08-545b7a220689",
+                        "external": false,
+                        "external_type": "",
+                        "value": "",
+                        "restriction": {
+                          "base": "string",
+                          "restriction_type": "min_max_restriction",
+                          "minLength": "1",
+                          "maxLength": "350"
+                        }
+                      }
+                    },
+                    {
+                      "min": 1,
+                      "max": 1,
+                      "name": "Id",
+                      "verbose_name": "Identification",
+                      "description": "Identifier which unambiguously identifies, within the implementation specification registry, the implementation specification to which the ISO 20022 message is compliant. This can be done via a URN. It can also contain a version number or date.\r\nFor instance, \"2018-01-01 \u2013 Version 2\" or \"urn:uuid:6e8bc430-9c3a-11d9-9669-0800200c9a66\".",
+                      "element_type": {
+                        "type": "simple_type",
+                        "uid": "b3d608e3-15da-4471-9f30-cd0660607a49",
+                        "external": false,
+                        "external_type": "",
+                        "value": "",
+                        "restriction": {
+                          "base": "string",
+                          "restriction_type": "min_max_restriction",
+                          "minLength": "1",
+                          "maxLength": "2048"
+                        }
+                      }
+                    }
+                  ]
+                ]
+              }
+            },
+            {
+              "min": 1,
+              "max": 1,
+              "name": "CreDt",
+              "verbose_name": "CreationDate",
+              "description": "Date and time when this Business Message (header) was created.",
+              "element_type": {
+                "type": "simple_type",
+                "uid": "c62947a6-e8c2-46ae-aad8-e3a176fb328e",
+                "external": false,
+                "external_type": "",
+                "value": "",
+                "restriction": {
+                  "base": "dateTime",
+                  "restriction_type": "pattern_restriction",
+                  "pattern": ".*(\\+|-)((0[0-9])|(1[0-3])):[0-5][0-9]"
+                }
+              }
+            },
+            {
+              "min": 0,
+              "max": 1,
+              "name": "CpyDplct",
+              "verbose_name": "CopyDuplicate",
+              "description": "Indicates whether the message is a Copy, a Duplicate or a copy of a duplicate of a previously sent ISO 20022 Message.",
+              "element_type": {
+                "type": "simple_type",
+                "uid": "f051abbd-5edc-4729-b4e2-7bd0a31539bd",
+                "external": false,
+                "external_type": "",
+                "value": "",
+                "restriction": {
+                  "base": "string",
+                  "restriction_type": "enum_restriction",
+                  "children": ["CODU", "COPY", "DUPL"]
+                }
+              }
+            },
+            {
+              "min": 0,
+              "max": 1,
+              "name": "PssblDplct",
+              "verbose_name": "PossibleDuplicate",
+              "description": "Flag indicating if the Business Message exchanged between the MessagingEndpoints is possibly a duplicate. \r\nIf the receiving MessagingEndpoint did not receive the original, then this Business Message should be processed as if it were the original. \r\n\r\nIf the receiving MessagingEndpoint did receive the original, then it should perform necessary actions to avoid processing this Business Message again.\r\n\r\nThis will guarantee business idempotent behaviour.\r\n\r\nNOTE: this is named \"PossResend\" in FIX - this is an application level resend not a network level retransmission.",
+              "element_type": {
+                "type": "simple_type",
+                "uid": "23cb9370-ab74-46ed-90bb-6d36c86254c0",
+                "external": false,
+                "external_type": "",
+                "value": "",
+                "restriction": { "base": "boolean", "restriction_type": "basic_restriction" }
+              }
+            },
+            {
+              "min": 0,
+              "max": 1,
+              "name": "Prty",
+              "verbose_name": "Priority",
+              "description": "Relative indication of the processing precedence of the message over a (set of) Business Messages with assigned priorities.",
+              "element_type": {
+                "type": "simple_type",
+                "uid": "cab8f90d-4619-484b-a2dd-5c78dbc448f7",
+                "external": false,
+                "external_type": "",
+                "value": "",
+                "restriction": {
+                  "base": "string",
+                  "restriction_type": "enum_restriction",
+                  "children": ["HIGH", "NORM"]
+                }
+              }
+            },
+            {
+              "min": 0,
+              "max": 1,
+              "name": "Rltd",
+              "verbose_name": "Related",
+              "description": "Specifies the Business Application Header(s) of the Business Message(s) to which this Business Message relates.\r\nCan be used when replying to a query; can also be used when canceling or amending.",
+              "element_type": {
+                "type": "element_sequence",
+                "uid": "fd632f73-cd4d-4081-b80d-aa6786992da3",
+                "children": [
+                  [
+                    {
+                      "min": 0,
+                      "max": 1,
+                      "name": "CharSet",
+                      "verbose_name": "CharacterSet",
+                      "description": "Contains the character set of the text-based elements used in the Business Message.",
+                      "element_type": {
+                        "type": "simple_type",
+                        "uid": "10a2de0d-1fe7-4533-973d-2311f3dc59fa",
+                        "external": false,
+                        "external_type": "",
+                        "value": "",
+                        "restriction": { "base": "string", "restriction_type": "basic_restriction" }
+                      }
+                    },
+                    {
+                      "min": 1,
+                      "max": 1,
+                      "name": "Fr",
+                      "verbose_name": "From",
+                      "description": "The sending MessagingEndpoint that has created this Business Message for the receiving MessagingEndpoint that will process this Business Message.\r\n\r\nNote\tthe sending MessagingEndpoint might be different from the sending address potentially contained in the transport header (as defined in the transport layer).",
+                      "element_type": {
+                        "type": "choice",
+                        "uid": "6514bfeb-3f67-4fa1-acc2-23f1c3f47ff3",
+                        "selected_child_index": 0,
+                        "children": [
+                          [
+                            {
+                              "min": 1,
+                              "max": 1,
+                              "name": "FIId",
+                              "verbose_name": "FinancialInstitutionIdentification",
+                              "description": "Identification of a financial institution.",
+                              "element_type": {
+                                "type": "element_sequence",
+                                "uid": "6abeee81-12aa-41d5-bad3-c44ffacd433a",
+                                "children": [
+                                  [
+                                    {
+                                      "min": 1,
+                                      "max": 1,
+                                      "name": "FinInstnId",
+                                      "verbose_name": "FinancialInstitutionIdentification",
+                                      "description": "Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme.",
+                                      "element_type": {
+                                        "type": "element_sequence",
+                                        "uid": "2ae6b76e-ffcf-467f-8404-2084139ed8ef",
+                                        "children": [
+                                          [
+                                            {
+                                              "min": 1,
+                                              "max": 1,
+                                              "name": "BICFI",
+                                              "verbose_name": "BICFI",
+                                              "description": "Code allocated to a financial institution by the ISO 9362 Registration Authority as described in ISO 9362 \"Banking - Banking telecommunication messages - Business identifier code (BIC)\".",
+                                              "element_type": {
+                                                "type": "simple_type",
+                                                "uid": "09c2c240-4d32-4949-8298-56d959c964b3",
+                                                "external": true,
+                                                "external_type": "BIC",
+                                                "value": "",
+                                                "restriction": {
+                                                  "base": "string",
+                                                  "restriction_type": "pattern_restriction",
+                                                  "pattern": "[A-Z0-9]{4,4}[A-Z]{2,2}[A-Z0-9]{2,2}([A-Z0-9]{3,3}){0,1}"
+                                                }
+                                              }
+                                            },
+                                            {
+                                              "min": 0,
+                                              "max": 1,
+                                              "name": "ClrSysMmbId",
+                                              "verbose_name": "ClearingSystemMemberIdentification",
+                                              "description": "Information used to identify a member within a clearing system.",
+                                              "element_type": {
+                                                "type": "element_sequence",
+                                                "uid": "520fbc47-1889-43c3-a366-af5e617f91e8",
+                                                "children": [
+                                                  [
+                                                    {
+                                                      "min": 1,
+                                                      "max": 1,
+                                                      "name": "ClrSysId",
+                                                      "verbose_name": "ClearingSystemIdentification",
+                                                      "description": "Specification of a pre-agreed offering between clearing agents or the channel through which the payment instruction is processed.",
+                                                      "element_type": {
+                                                        "type": "choice",
+                                                        "uid": "352a1b15-fae0-4372-8600-714a27eb24ac",
+                                                        "selected_child_index": 0,
+                                                        "children": [
+                                                          [
+                                                            {
+                                                              "min": 1,
+                                                              "max": 1,
+                                                              "name": "Cd",
+                                                              "verbose_name": "Code",
+                                                              "description": "Identification of a clearing system, in a coded form as published in an external list.",
+                                                              "element_type": {
+                                                                "type": "simple_type",
+                                                                "uid": "1abf305d-9491-48ef-a74c-4a1afb1b5991",
+                                                                "external": true,
+                                                                "external_type": "ExternalClearingSystemIdentification1Code",
+                                                                "value": "",
+                                                                "restriction": {
+                                                                  "base": "string",
+                                                                  "restriction_type": "min_max_restriction",
+                                                                  "minLength": "1",
+                                                                  "maxLength": "5"
+                                                                }
+                                                              }
+                                                            }
+                                                          ]
+                                                        ]
+                                                      }
+                                                    },
+                                                    {
+                                                      "min": 1,
+                                                      "max": 1,
+                                                      "name": "MmbId",
+                                                      "verbose_name": "MemberIdentification",
+                                                      "description": "Identification of a member of a clearing system.",
+                                                      "element_type": {
+                                                        "type": "simple_type",
+                                                        "uid": "7cb86dfa-19fa-414b-bec0-3e7d8a16d2a0",
+                                                        "external": false,
+                                                        "external_type": "",
+                                                        "value": "",
+                                                        "restriction": {
+                                                          "base": "string",
+                                                          "restriction_type": "min_max_pattern_restriction",
+                                                          "minLength": "1",
+                                                          "maxLength": "28",
+                                                          "pattern": "[0-9a-zA-Z/\\-\\?:\\(\\)\\.,'\\+ ]+"
+                                                        }
+                                                      }
+                                                    }
+                                                  ]
+                                                ]
+                                              }
+                                            },
+                                            {
+                                              "min": 0,
+                                              "max": 1,
+                                              "name": "LEI",
+                                              "verbose_name": "LEI",
+                                              "description": "Legal entity identifier of the financial institution.",
+                                              "element_type": {
+                                                "type": "simple_type",
+                                                "uid": "c0a919a4-05e3-421f-947a-73d7b64f47ed",
+                                                "external": false,
+                                                "external_type": "",
+                                                "value": "",
+                                                "restriction": {
+                                                  "base": "string",
+                                                  "restriction_type": "pattern_restriction",
+                                                  "pattern": "[A-Z0-9]{18,18}[0-9]{2,2}"
+                                                }
+                                              }
+                                            }
+                                          ]
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                ]
+                              }
+                            }
+                          ]
+                        ]
+                      }
+                    },
+                    {
+                      "min": 1,
+                      "max": 1,
+                      "name": "To",
+                      "verbose_name": "To",
+                      "description": "The MessagingEndpoint designated by the sending MessagingEndpoint to be the recipient who will ultimately process this Business Message.\r\n\r\nNote the receiving MessagingEndpoint might be different from the receiving address potentially contained in the transport header (as defined in the transport layer).",
+                      "element_type": {
+                        "type": "choice",
+                        "uid": "62d5f288-a17f-4685-b06b-b3604e92abc4",
+                        "selected_child_index": 0,
+                        "children": [
+                          [
+                            {
+                              "min": 1,
+                              "max": 1,
+                              "name": "FIId",
+                              "verbose_name": "FinancialInstitutionIdentification",
+                              "description": "Identification of a financial institution.",
+                              "element_type": {
+                                "type": "element_sequence",
+                                "uid": "c50497c7-225f-4c06-bc20-a33c52edcb87",
+                                "children": [
+                                  [
+                                    {
+                                      "min": 1,
+                                      "max": 1,
+                                      "name": "FinInstnId",
+                                      "verbose_name": "FinancialInstitutionIdentification",
+                                      "description": "Unique and unambiguous identification of a financial institution, as assigned under an internationally recognised or proprietary identification scheme.",
+                                      "element_type": {
+                                        "type": "element_sequence",
+                                        "uid": "b236a834-ab11-4272-8349-6e2dbdb0522b",
+                                        "children": [
+                                          [
+                                            {
+                                              "min": 1,
+                                              "max": 1,
+                                              "name": "BICFI",
+                                              "verbose_name": "BICFI",
+                                              "description": "Code allocated to a financial institution by the ISO 9362 Registration Authority as described in ISO 9362 \"Banking - Banking telecommunication messages - Business identifier code (BIC)\".",
+                                              "element_type": {
+                                                "type": "simple_type",
+                                                "uid": "2abe0c58-6344-44f4-9e0c-d44cab319789",
+                                                "external": true,
+                                                "external_type": "BIC",
+                                                "value": "",
+                                                "restriction": {
+                                                  "base": "string",
+                                                  "restriction_type": "pattern_restriction",
+                                                  "pattern": "[A-Z0-9]{4,4}[A-Z]{2,2}[A-Z0-9]{2,2}([A-Z0-9]{3,3}){0,1}"
+                                                }
+                                              }
+                                            },
+                                            {
+                                              "min": 0,
+                                              "max": 1,
+                                              "name": "ClrSysMmbId",
+                                              "verbose_name": "ClearingSystemMemberIdentification",
+                                              "description": "Information used to identify a member within a clearing system.",
+                                              "element_type": {
+                                                "type": "element_sequence",
+                                                "uid": "3b0c5eab-6404-4956-a53d-6586d6537334",
+                                                "children": [
+                                                  [
+                                                    {
+                                                      "min": 1,
+                                                      "max": 1,
+                                                      "name": "ClrSysId",
+                                                      "verbose_name": "ClearingSystemIdentification",
+                                                      "description": "Specification of a pre-agreed offering between clearing agents or the channel through which the payment instruction is processed.",
+                                                      "element_type": {
+                                                        "type": "choice",
+                                                        "uid": "3614c508-0b27-4a84-9434-7da8117b6ca7",
+                                                        "selected_child_index": 0,
+                                                        "children": [
+                                                          [
+                                                            {
+                                                              "min": 1,
+                                                              "max": 1,
+                                                              "name": "Cd",
+                                                              "verbose_name": "Code",
+                                                              "description": "Identification of a clearing system, in a coded form as published in an external list.",
+                                                              "element_type": {
+                                                                "type": "simple_type",
+                                                                "uid": "577db734-2349-4f68-b4b4-925aeb506cc5",
+                                                                "external": true,
+                                                                "external_type": "ExternalClearingSystemIdentification1Code",
+                                                                "value": "",
+                                                                "restriction": {
+                                                                  "base": "string",
+                                                                  "restriction_type": "min_max_restriction",
+                                                                  "minLength": "1",
+                                                                  "maxLength": "5"
+                                                                }
+                                                              }
+                                                            }
+                                                          ]
+                                                        ]
+                                                      }
+                                                    },
+                                                    {
+                                                      "min": 1,
+                                                      "max": 1,
+                                                      "name": "MmbId",
+                                                      "verbose_name": "MemberIdentification",
+                                                      "description": "Identification of a member of a clearing system.",
+                                                      "element_type": {
+                                                        "type": "simple_type",
+                                                        "uid": "09950d67-d35f-4ba5-922d-f37ce1a60453",
+                                                        "external": false,
+                                                        "external_type": "",
+                                                        "value": "",
+                                                        "restriction": {
+                                                          "base": "string",
+                                                          "restriction_type": "min_max_pattern_restriction",
+                                                          "minLength": "1",
+                                                          "maxLength": "28",
+                                                          "pattern": "[0-9a-zA-Z/\\-\\?:\\(\\)\\.,'\\+ ]+"
+                                                        }
+                                                      }
+                                                    }
+                                                  ]
+                                                ]
+                                              }
+                                            },
+                                            {
+                                              "min": 0,
+                                              "max": 1,
+                                              "name": "LEI",
+                                              "verbose_name": "LEI",
+                                              "description": "Legal entity identifier of the financial institution.",
+                                              "element_type": {
+                                                "type": "simple_type",
+                                                "uid": "ea6546df-8edc-42bf-a3e5-2a54bf57392a",
+                                                "external": false,
+                                                "external_type": "",
+                                                "value": "",
+                                                "restriction": {
+                                                  "base": "string",
+                                                  "restriction_type": "pattern_restriction",
+                                                  "pattern": "[A-Z0-9]{18,18}[0-9]{2,2}"
+                                                }
+                                              }
+                                            }
+                                          ]
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                ]
+                              }
+                            }
+                          ]
+                        ]
+                      }
+                    },
+                    {
+                      "min": 1,
+                      "max": 1,
+                      "name": "BizMsgIdr",
+                      "verbose_name": "BusinessMessageIdentifier",
+                      "description": "Unambiguously identifies the Business Message to the MessagingEndpoint that has created the Business Message.",
+                      "element_type": {
+                        "type": "simple_type",
+                        "uid": "70ae5dac-0b76-45eb-a225-9f20aafcbda3",
+                        "external": false,
+                        "external_type": "",
+                        "value": "",
+                        "restriction": {
+                          "base": "string",
+                          "restriction_type": "min_max_restriction",
+                          "minLength": "1",
+                          "maxLength": "35"
+                        }
+                      }
+                    },
+                    {
+                      "min": 1,
+                      "max": 1,
+                      "name": "MsgDefIdr",
+                      "verbose_name": "MessageDefinitionIdentifier",
+                      "description": "Contains the MessageIdentifier that defines the BusinessMessage.\r\nIt must contain a MessageIdentifier published on the ISO 20022 website.\r\n\r\nexample\tcamt.001.001.03.",
+                      "element_type": {
+                        "type": "simple_type",
+                        "uid": "0b020dda-6541-4667-b861-2d697bb200d2",
+                        "external": false,
+                        "external_type": "",
+                        "value": "",
+                        "restriction": {
+                          "base": "string",
+                          "restriction_type": "min_max_restriction",
+                          "minLength": "1",
+                          "maxLength": "35"
+                        }
+                      }
+                    },
+                    {
+                      "min": 0,
+                      "max": 1,
+                      "name": "BizSvc",
+                      "verbose_name": "BusinessService",
+                      "description": "Specifies the business service agreed between the two MessagingEndpoints under which rules this Business Message is exchanged.\r\n To be used when there is a choice of processing services or processing service levels.\r\nExample: E&I.",
+                      "element_type": {
+                        "type": "simple_type",
+                        "uid": "40779f80-6f86-4e84-8a1b-e7a54f037e93",
+                        "external": false,
+                        "external_type": "",
+                        "value": "",
+                        "restriction": {
+                          "base": "string",
+                          "restriction_type": "min_max_restriction",
+                          "minLength": "1",
+                          "maxLength": "35"
+                        }
+                      }
+                    },
+                    {
+                      "min": 1,
+                      "max": 1,
+                      "name": "CreDt",
+                      "verbose_name": "CreationDate",
+                      "description": "Date and time when this Business Message (header) was created.\r\nNote Times must be normalized, using the \"Z\" annotation.",
+                      "element_type": {
+                        "type": "simple_type",
+                        "uid": "03c70cc3-c200-4bf8-8f59-bff083481c04",
+                        "external": false,
+                        "external_type": "",
+                        "value": "",
+                        "restriction": {
+                          "base": "dateTime",
+                          "restriction_type": "pattern_restriction",
+                          "pattern": ".*(\\+|-)((0[0-9])|(1[0-3])):[0-5][0-9]"
+                        }
+                      }
+                    },
+                    {
+                      "min": 0,
+                      "max": 1,
+                      "name": "CpyDplct",
+                      "verbose_name": "CopyDuplicate",
+                      "description": "Indicates whether the message is a Copy, a Duplicate or a copy of a duplicate of a previously sent ISO 20022 Message.",
+                      "element_type": {
+                        "type": "simple_type",
+                        "uid": "4d456823-ac33-47d7-a721-67201a7fa14a",
+                        "external": false,
+                        "external_type": "",
+                        "value": "",
+                        "restriction": {
+                          "base": "string",
+                          "restriction_type": "enum_restriction",
+                          "children": ["CODU", "COPY", "DUPL"]
+                        }
+                      }
+                    },
+                    {
+                      "min": 0,
+                      "max": 1,
+                      "name": "Prty",
+                      "verbose_name": "Priority",
+                      "description": "Relative indication of the processing precedence of the message over a (set of) Business Messages with assigned priorities.",
+                      "element_type": {
+                        "type": "simple_type",
+                        "uid": "44dd8a27-90b1-43e5-9fe4-364627fbb53a",
+                        "external": false,
+                        "external_type": "",
+                        "value": "",
+                        "restriction": { "base": "string", "restriction_type": "basic_restriction" }
+                      }
+                    }
+                  ]
+                ]
+              }
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

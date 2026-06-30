@@ -8,7 +8,7 @@ export * from './rhf-checkbox';
 
 export * from './schema-helper';
 
-export * from './form-provider';
+export * from '../form-provider';
 
 export * from './rhf-text-field';
 
