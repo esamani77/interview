@@ -2,10 +2,13 @@ import MenuItem from '@mui/material/MenuItem';
 
 import buildRules from 'src/utils/build-rules';
 
+import { INPUT_BASES, INPUT_FIELD_TYPES } from 'src/constants';
+
 import { Field } from 'src/components/hook-form/hook-form-fields';
 
 export default function FieldSwitcher({ node, name }) {
   const { restriction } = node.element_type;
+
   const common = {
     name,
     label: node.verbose_name,
@@ -13,7 +16,7 @@ export default function FieldSwitcher({ node, name }) {
     rules: buildRules(node),
   };
 
-  if (restriction.restriction_type === 'enum_restriction') {
+  if (restriction.restriction_type === INPUT_FIELD_TYPES.ENUM_RESTRICTION) {
     return (
       <Field.Select {...common}>
         {restriction.children.map((item) => (
@@ -24,7 +27,8 @@ export default function FieldSwitcher({ node, name }) {
       </Field.Select>
     );
   }
-  if (restriction.base === 'boolean') return <Field.Switch name={name} label={node.verbose_name} />;
-  if (restriction.base === 'dateTime') return <Field.MobileDateTimePicker {...common} />;
+  if (restriction.base === INPUT_BASES.BOOLEAN)
+    return <Field.Switch name={name} label={node.verbose_name} />;
+  if (restriction.base === INPUT_BASES.DATE_TIME) return <Field.MobileDateTimePicker {...common} />;
   return <Field.Text {...common} />;
 }

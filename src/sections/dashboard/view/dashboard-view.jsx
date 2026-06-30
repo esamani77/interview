@@ -5,12 +5,14 @@ import { useForm } from 'react-hook-form';
 import { Card, Button, Typography } from '@mui/material';
 
 import { Form } from 'src/components/hook-form/hook-form-fields';
-import { FieldBuilder } from 'src/components/hook-form/rhf-field-builder';
+import FieldBuilder from 'src/components/hook-form/rhf-field-builder';
 
 import formJson from '../../../data/data.json';
 
 export default function DashboardView() {
-  const methods = useForm();
+  const methods = useForm({
+    shouldUnregister: true,
+  });
   const { handleSubmit } = methods;
 
   const {
