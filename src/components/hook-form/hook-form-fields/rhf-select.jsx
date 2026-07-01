@@ -33,6 +33,7 @@ export function RHFSelect({
       rules={rules}
       name={name}
       control={control}
+      defaultValue=""
       render={({ field: { ref, ...field }, fieldState: { error } }) => (
         <TextField
           {...field}
