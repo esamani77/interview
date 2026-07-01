@@ -1,5 +1,5 @@
 export const INPUT_FIELD_TYPES = {
-  BOOLEAN: 'choice',
+  CHOICE: 'choice',
   ELEMENT_SEQUENCE: 'element_sequence',
   ENUM_RESTRICTION: 'enum_restriction',
 };

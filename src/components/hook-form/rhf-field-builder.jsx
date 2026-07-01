@@ -57,7 +57,7 @@ export default function FieldBuilder({ node, name }) {
     );
   }
 
-  if (type === INPUT_FIELD_TYPES.BOOLEAN) {
+  if (type === INPUT_FIELD_TYPES.CHOICE) {
     const picked = node.element_type.children[0][node.element_type.selected_child_index];
     return <FieldBuilder node={picked} name={path} />;
   }

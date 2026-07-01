@@ -7,7 +7,7 @@ import { Card, Button, Typography } from '@mui/material';
 import { Form } from 'src/components/hook-form/hook-form-fields';
 import FieldBuilder from 'src/components/hook-form/rhf-field-builder';
 
-import formJson from '../../../data/data.json';
+import formJson from '../../../../public/data.json';
 
 export default function DashboardView() {
   const methods = useForm({
@@ -21,9 +21,11 @@ export default function DashboardView() {
 
   const onSubmit = handleSubmit(
     (data) => {
+      alert('Form submitted successfully');
       console.log(data);
     },
     (errors) => {
+      alert('Form validation failed');
       console.log(errors);
     }
   );
