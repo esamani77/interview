@@ -4,6 +4,8 @@ import { useForm } from 'react-hook-form';
 
 import { Card, Button, Typography } from '@mui/material';
 
+import refillJson from 'src/utils/refill-json';
+
 import { Form } from 'src/components/hook-form/hook-form-fields';
 import FieldBuilder from 'src/components/hook-form/rhf-field-builder';
 
@@ -21,8 +23,11 @@ export default function DashboardView() {
 
   const onSubmit = handleSubmit(
     (data) => {
+      const filledForm = {
+        appHdr: { element: refillJson(form, data[form.name]) },
+      };
+      console.log(filledForm);
       alert('Form submitted successfully');
-      console.log(data);
     },
     (errors) => {
       alert('Form validation failed');

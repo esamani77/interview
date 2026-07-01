@@ -27,7 +27,7 @@ export function RHFTextField({ name, helperText, type, rules, modifyFn, ...other
               };
             }
           }}
-          value={type === 'number' && field.value === 0 ? '' : field.value}
+          value={type === 'number' && field.value === 0 ? '' : (field.value ?? '')}
           onChange={(event) => {
             if (modifyFn) {
               event.target.value = modifyFn(event);
