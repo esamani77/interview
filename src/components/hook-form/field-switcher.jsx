@@ -28,7 +28,13 @@ export default function FieldSwitcher({ node, name }) {
     );
   }
   if (restriction.base === INPUT_BASES.BOOLEAN)
-    return <Field.Switch name={name} label={node.verbose_name} />;
+    return (
+      <Field.Switch
+        name={name}
+        label={node.verbose_name}
+        defaultValue={!!node.element_type.value}
+      />
+    );
   if (restriction.base === INPUT_BASES.DATE_TIME) return <Field.MobileDateTimePicker {...common} />;
   return <Field.Text {...common} />;
 }
