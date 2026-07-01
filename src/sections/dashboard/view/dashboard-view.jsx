@@ -1,8 +1,9 @@
 // ----------------------------------------------------------------------
 
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { Card, Button, Typography } from '@mui/material';
+import { Card, Dialog, Button, Typography, DialogTitle, DialogContent } from '@mui/material';
 
 import refillJson from 'src/utils/refill-json';
 
@@ -16,6 +17,7 @@ export default function DashboardView() {
     shouldUnregister: true,
   });
   const { handleSubmit } = methods;
+  const [filledForm, setFilledForm] = useState(null);
 
   const {
     appHdr: { element: form },
@@ -23,11 +25,11 @@ export default function DashboardView() {
 
   const onSubmit = handleSubmit(
     (data) => {
-      const filledForm = {
+      const filledFormData = {
         appHdr: { element: refillJson(form, data[form.name]) },
       };
-      console.log(filledForm);
-      alert('Form submitted successfully');
+      console.log(filledFormData);
+      setFilledForm(filledFormData);
     },
     (errors) => {
       alert('Form validation failed');
@@ -48,6 +50,13 @@ export default function DashboardView() {
           Submit
         </Button>
       </Form>
+
+      <Dialog open={!!filledForm} onClose={() => setFilledForm(null)} maxWidth="sm" fullWidth>
+        <DialogTitle>Submitted Data</DialogTitle>
+        <DialogContent>
+          <pre>{JSON.stringify(filledForm, null, 2)}</pre>
+        </DialogContent>
+      </Dialog>
     </>
   );
 }
